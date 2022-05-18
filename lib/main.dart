@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:project/routes/routes.dart';
+import 'package:project/views/home_view.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+   MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  MyRoutes _routes = MyRoutes();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      // home: HomeView(),
+      onGenerateRoute: _routes.onGeneraRoute,
+      initialRoute: "/home",
     );
   }
 }
