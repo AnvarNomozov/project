@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/core/constants/color_const.dart';
 import 'package:project/core/constants/size_const.dart';
 import 'package:project/core/extension/size_extension.dart';
 import 'package:project/core/widget/text_widget.dart';
@@ -16,53 +15,81 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        centerTitle: true,
+        title: TextWidget(
+          text: "Home Page",
+          fontSize: SizeConst.kNormalSize,
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.list,
+              size: 32,
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, "/saved");
+            },
+          ),
+        ],
       ),
       body: FutureBuilder(
         future: CatService.getData(),
         builder: (BuildContext context, AsyncSnapshot<List<CatModel>> snap) {
           if (snap.hasError) {
-            return Center(
+            return const Center(
               child: Text("ERROR"),
             );
           } else if (!snap.hasData) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator.adaptive(),
             );
           } else {
             var data = snap.data;
+            context.watch<NextPhotoProvider>().aboutcat.add(
+                  data![context.watch<NextPhotoProvider>().index]
+                      .text
+                      .toString(),
+                );
             return SizedBox(
               width: context.s,
               height: context.s,
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: SizeConst.KMaxMaxSize),
+                    padding: EdgeInsets.only(
+                      top: SizeConst.KMaxMaxSize,
+                      bottom: SizeConst.kMaxSize,
+                    ),
                     child: TextWidget(
-                      text: data![3].type.toString().toUpperCase(),
+                      text: data[3].type.toString().toUpperCase(),
                       fontSize: SizeConst.kMaxSize,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
                     width: context.s,
                     height: context.s * 0.45,
                     child: FadeInImage(
                       image:
                           NetworkImage(context.watch<NextPhotoProvider>().img),
                       fit: BoxFit.cover,
-                      placeholder: AssetImage("assets/gif/loading.gif"),
+                      placeholder: const AssetImage("assets/gif/loading.gif"),
                     ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: SizeConst.kMinSize,
-                        vertical: SizeConst.kMaxSize),
+                      horizontal: SizeConst.kMinSize,
+                      vertical: SizeConst.kMaxSize,
+                    ),
                     child: SizedBox(
                       width: context.s,
                       height: context.s * 0.13,
                       child: TextWidget(
-                          text: data[context.watch<NextPhotoProvider>().index].text.toString(),
-                          fontSize: SizeConst.kMinSize),
+                        text: data[context.watch<NextPhotoProvider>().index]
+                            .text
+                            .toString(),
+                        fontSize: SizeConst.kMinSize,
+                      ),
                     ),
                   ),
                   ElevatedButton(
