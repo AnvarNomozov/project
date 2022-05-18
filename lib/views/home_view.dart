@@ -17,12 +17,13 @@ class HomeView extends StatelessWidget {
         elevation: 0,
         centerTitle: true,
         title: TextWidget(
-          text: "Home Page",
+          // context.watch<NextPhotoProvider>().index.toString(),
+          text: context.watch<NextPhotoProvider>().index.toString(),
           fontSize: SizeConst.kNormalSize,
         ),
         actions: [
           IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.list,
               size: 32,
             ),
@@ -46,9 +47,7 @@ class HomeView extends StatelessWidget {
           } else {
             var data = snap.data;
             context.watch<NextPhotoProvider>().aboutcat.add(
-                  data![context.watch<NextPhotoProvider>().index]
-                      .text
-                      .toString(),
+                  data![0].text.toString(),
                 );
             return SizedBox(
               width: context.s,
@@ -61,7 +60,7 @@ class HomeView extends StatelessWidget {
                       bottom: SizeConst.kMaxSize,
                     ),
                     child: TextWidget(
-                      text: data[3].type.toString().toUpperCase(),
+                      text: data[0].type.toString().toUpperCase(),
                       fontSize: SizeConst.kMaxSize,
                     ),
                   ),
@@ -85,9 +84,7 @@ class HomeView extends StatelessWidget {
                       width: context.s,
                       height: context.s * 0.13,
                       child: TextWidget(
-                        text: data[context.watch<NextPhotoProvider>().index]
-                            .text
-                            .toString(),
+                        text: data[0].text.toString(),
                         fontSize: SizeConst.kMinSize,
                       ),
                     ),

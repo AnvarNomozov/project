@@ -1,19 +1,17 @@
 import 'package:flutter/cupertino.dart';
+import 'package:project/service/cat_service.dart';
 
 class NextPhotoProvider extends ChangeNotifier {
   int index = 0;
   List aboutcat = [];
-  
+
   String img = "https://cataas.com/cat";
-  void nextInformation() async {
-    img = await "https://cataas.com/cat/$index";
-    if (index == 2) {
-      index = 0;
-      print(aboutcat);
-    } else {
-      print(aboutcat);
-      index += 1;
-    }
+  nextInformation() {
+    img;
+    index += 1;
+    img = "https://cataas.com/cat/$index";
+    CatService.getData();
+    print(index);
     notifyListeners();
   }
 }
