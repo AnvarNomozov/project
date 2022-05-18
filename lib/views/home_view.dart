@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:project/core/constants/size_const.dart';
+import 'package:project/core/extension/size_extension.dart';
+import 'package:project/core/widget/text_widget.dart';
 import 'package:project/model/cat_model.dart';
 import 'package:project/service/cat_service.dart';
 
@@ -10,6 +13,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: FutureBuilder(
         future: CatService.getData(),
         builder: (BuildContext context, AsyncSnapshot<List<CatModel>> snap) {
@@ -23,9 +27,13 @@ class HomeView extends StatelessWidget {
             );
           } else {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text(snap.data!.first.toString())],
-          );
+              children: [
+                TextWidget(
+                  text: "About Cat",
+                  fontSize: SizeConst.kMinSize,
+                ),
+              ],
+            );
           }
         },
       ),
