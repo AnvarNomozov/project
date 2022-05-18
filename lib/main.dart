@@ -3,11 +3,11 @@ import 'package:project/routes/routes.dart';
 import 'package:project/views/home_view.dart';
 
 void main() {
-  runApp( MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   MyRoutes _routes = MyRoutes();
   @override
@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home: HomeView(),
       onGenerateRoute: _routes.onGeneraRoute,
       initialRoute: "/home",
     );

@@ -1,7 +1,7 @@
 class SizeConst {
-  static double kMaMinSize = 14.0;
-  static double kMinSize = 16.0;
-  static double kNormalSize = 18.0;
-  static double kMaxSize= 20.0;
-  static double KMaxMaxSize = 24.0;
+  static double kMaxMinSize = 15.0;
+  static double kMinSize = 20.0;
+  static double kNormalSize = 25.0;
+  static double kMaxSize= 30.0;
+  static double KMaxMaxSize = 35.0;
 }
