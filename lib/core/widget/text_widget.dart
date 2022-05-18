@@ -6,18 +6,19 @@ class TextWidget extends StatelessWidget {
   double fontSize;
   Color? color = ColorConst.kPrimartBlack;
   FontWeight? fontWeight;
-  TextWidget(
-      {Key? key,
-      required this.text,
-      this.color,
-      required this.fontSize,
-      this.fontWeight})
-      : super(key: key);
+  TextWidget({
+    Key? key,
+    required this.text,
+    this.color,
+    required this.fontSize,
+    this.fontWeight,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: TextAlign.center,
       style: TextStyle(
         color: color,
         fontSize: fontSize,

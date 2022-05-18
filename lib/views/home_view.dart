@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:project/core/constants/color_const.dart';
 import 'package:project/core/constants/size_const.dart';
 import 'package:project/core/extension/size_extension.dart';
 import 'package:project/core/widget/text_widget.dart';
 import 'package:project/model/cat_model.dart';
+import 'package:project/provider/next_photo_provider.dart';
 import 'package:project/service/cat_service.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -43,14 +43,37 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                   Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
                     width: context.s,
-                    height: context.s * 0.5,
-                    color: ColorConst.kPrimartBlack,
+                    height: context.s * 0.45,
                     child: FadeInImage(
-                      image: NetworkImage("https://cataas.com/cat"),
-                      placeholder: AssetImage("assets/gif/load.gif"),
+                      image:
+                          NetworkImage(context.watch<NextPhotoProvider>().img),
+                      fit: BoxFit.cover,
+                      placeholder: AssetImage("assets/gif/loading.gif"),
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: SizeConst.kMinSize,
+                        vertical: SizeConst.kMaxSize),
+                    child: SizedBox(
+                      width: context.s,
+                      height: context.s * 0.13,
+                      child: TextWidget(
+                          text: data[context.watch<NextPhotoProvider>().index].text.toString(),
+                          fontSize: SizeConst.kMinSize),
+                    ),
+                  ),
+                  ElevatedButton(
+                    child: TextWidget(
+                      text: "Next Cat",
+                      fontSize: SizeConst.kNormalSize,
+                    ),
+                    onPressed: () {
+                      context.read<NextPhotoProvider>().nextInformation();
+                    },
+                  ),
                 ],
               ),
             );

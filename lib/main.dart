@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:project/provider/next_photo_provider.dart';
 import 'package:project/routes/routes.dart';
 import 'package:project/views/home_view.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => NextPhotoProvider(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
